@@ -1,0 +1,32 @@
+{
+    "process_csv_pd": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/",
+    "input_files": ["PD_2017_Q1.csv", "PD_2017_Q2.csv", "PD_2017_Q3.csv", "PD_2017_Q4.csv", "PD_2018_Q1.csv", "PD_2018_Q2.csv", "PD_2018_Q3.csv", "PD_2018_Q4.csv"],
+    "output_file_name": "new_PD_2017-18_Q1-4.mat"
+  },
+  "process_m1_data": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/",
+    "input_files": ["PD_EX_M1.csv"],
+    "output_file_name": "new_PD_EX_M1.mat"
+  },
+  "process_qa_data": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/",
+    "input_file_name": "QA_DATA_2017-18.csv",
+    "output_file_name": "QA_DATA_2017-18.mat"
+  },
+  "generate_factors": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/",
+    "input_file_name": "PD_2017_Q1.csv",
+    "output_file_name": "PD_KEY_FACTOR.mat"
+  },
+  "analysis_data": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/ana/",
+    "output_file_name": "ANA_2017-18_Q_1-4",
+    "extension": ".mat"
+  }
+}
