@@ -1,10 +1,8 @@
-% clear all;
-% clc;
+clear all;
+clc;
 
-global g_VERBOSE;
+global g_VERBOSE BATCH_SIZE;
 g_VERBOSE = 1;
-
-global BATCH_SIZE;
 BATCH_SIZE = 3000;
 
 main_p();
@@ -89,8 +87,6 @@ function [indexAcc, objArr, data_mean, stdiv, filter_arr] = get_pd_analysis(inde
         end
         filter_arr = [filter_arr; filter_data];
     end
-       
-    
 
     if(~isempty(sen_data))
         data_mean = nanmean(sen_data, 1);
@@ -219,30 +215,39 @@ function data_analysis(config)
  
     disp("Loading process data file " + PD_FILE);
     drawnow;
+    tic;
     pd_data = load(PD_FILE);
-
-    disp("Loading qa data file " + PD_FILE);
-    drawnow;
-    qa_data = load(QA_FILE);
-
-    disp("Loading energy data file " + PD_FILE);
-    drawnow;
-    eng_data = load(ENG_FILE);
+    toc;
     
-    disp("Loading factors data file " + PD_FILE);
+    disp("Loading qa data file " + QA_FILE);
     drawnow;
+    tic;
+    qa_data = load(QA_FILE);
+    toc;
+    
+    disp("Loading energy data file " + ENG_FILE);
+    drawnow;
+    tic;
+    eng_data = load(ENG_FILE);
+    toc;
+    
+    disp("Loading factors data file " + FAC_FILE);
+    drawnow;
+    tic;
     fac_data = load(FAC_FILE);
+    toc;
     % end of opening mat file.
     
     
     pd_start_index = 1;
     qa_index = 1;
     file_suffix = 1;
-    
     while qa_index < length(qa_data.mat_obj)
+        tic;
         [qa_index, pd_start_index, file_suffix] = chunk_data_analysis(config, qa_index, pd_start_index, file_suffix, BATCH_SIZE, pd_data, qa_data, eng_data, fac_data);
         disp("QA index " + qa_index + " PD index " + pd_start_index + " suffix " + file_suffix);
         drawnow;
+        toc;
     end
   
 end
@@ -263,7 +268,7 @@ function run_preprocess()
         if(method.run == 1)
             disp(">>>Running preprocess method named " + method.name);
             drawnow;
-            method.func(config);
+            method.func();
             disp("<<<End of calling preprocess method named " + method.name);
         end
     end
@@ -277,7 +282,7 @@ function main_p()
     
     % running all the preprocessing of input files.     
     run_preprocess();
-    
+
     % generating the analytical mat files.    
     data_analysis(config);
     

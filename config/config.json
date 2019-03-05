@@ -21,7 +21,70 @@
     "in_dir": "../data/in/",
     "out_dir": "../data/out/",
     "input_file_name": "PD_2017_Q1.csv",
-    "output_file_name": "PD_KEY_FACTOR.mat"
+    "output_file_name": "PD_KEY_FACTOR_WITH_FILTER.mat",
+    "terms": [
+        {
+            "name": "dry",
+            "key_match": ["dry"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "pressure",
+            "key_match": ["pres"],
+            "ignore": ["301_DWP_Torque_Pressure_me", "301_DWP_Torque_Pressure_pos", "301_DWP_Torque_Pressure_spa", "301_DWP_Torque_Regulation_Pres"]
+        },
+        {
+            "name": "moisture",
+            "key_match": ["moisture"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "pump",
+            "key_match": ["pump"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "torque",
+            "key_match": ["torque"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "speed",
+            "key_match": ["speed"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "motor",
+            "key_match": ["motor"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "heating",
+            "key_match": ["heating"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "current",
+            "key_match": ["cur"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "steam",
+            "key_match": ["steam"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "water",
+            "key_match": ["water"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "vaccum",
+            "key_match": ["vaccum"],
+            "ignore": ["none"]
+        }
+
+    ]
   },
   "analysis_data": {
     "in_dir": "../data/in/",
