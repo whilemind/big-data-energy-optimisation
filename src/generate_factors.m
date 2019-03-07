@@ -8,7 +8,7 @@ function generate_factors()
     OUTPUT_FILE_NAME = "" + config.generate_factors.output_file_name;
     
     OUT_FILE = OUTPUT_DIR + OUTPUT_FILE_NAME;
-%     terms = ["dry", "pres", "moisture", "pump", "torque", "speed", "motor", "heating", "broke", "cur", "steam", "water", "vaccum"];
+
 
     IN_FILE = INPUT_DIR + INPUT_FILE_NAME;
     disp("Processing IN FILE " + IN_FILE);

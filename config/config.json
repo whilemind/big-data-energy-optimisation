@@ -77,11 +77,6 @@
             "name": "water",
             "key_match": ["water"],
             "ignore": ["none"]
-        },
-        {
-            "name": "vaccum",
-            "key_match": ["vaccum"],
-            "ignore": ["none"]
         }
 
     ]
@@ -91,5 +86,12 @@
     "out_dir": "../data/out/ana/",
     "output_file_name": "ANA_2017-18_Q_1-4",
     "extension": ".mat"
+  },
+  "bad_reel": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/ana/",
+    "bad_reel_file": "../data/out/badreel.mat",
+    "input_file_name": ["ANA_2017-18_Q_1-4_1.mat", "ANA_2017-18_Q_1-4_2.mat", "ANA_2017-18_Q_1-4_3.mat", "ANA_2017-18_Q_1-4_4.mat"],
+    "output_file_name": "ANA_2017-18_Q_1-4_bad_reel.mat"
   }
 }
