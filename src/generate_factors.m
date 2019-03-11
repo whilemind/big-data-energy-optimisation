@@ -36,9 +36,9 @@ function generate_factors()
     selected = [];
     totalColumn = 0;
     for t = 1:length(termObj)
+        obj = [];
+        k = 0;
         for i = 1:length(termObj(t).key_match)
-            obj = [];
-            k = 0;
             for j = 1:length(col_details)
                 if ~any(strcmp(termObj(t).ignore, col_details(j).name)) && col_details(j).is_used == 0 && contains(col_details(j).name, termObj(t).key_match(i), 'IgnoreCase', true)
                     keyObj = struct('column_name', col_details(j).name, 'column_index', col_details(j).index);
@@ -47,9 +47,9 @@ function generate_factors()
                     k = k + 1;
                 end % end of if
             end % end of for
-            totalColumn = totalColumn + k;
-            selected = [selected, struct('keyword', termObj(t).name, 'fields', obj, 'fieldCount', k, 'ratio', (k*100)/length(col_names))];
         end
+        totalColumn = totalColumn + k;
+        selected = [selected, struct('keyword', termObj(t).name, 'fields', obj, 'fieldCount', k, 'ratio', (k*100)/length(col_names))];
     end
     
     factors = struct(...
