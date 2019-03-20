@@ -16,8 +16,8 @@ function generate_gradecode()
     toc;
     
     gradecode = [];
-%     all_gd = extractfield(qa_data.mat_obj, 'grade_code');
-    all_gd = [qa_data.mat_obj.grade_code];
+    all_gd = extractfield(qa_data.mat_obj, 'grade_code');
+%     all_gd = [qa_data.mat_obj.grade_code];
     gradecode = unique(all_gd);
    
     save(OUT_MAT_FILE, 'gradecode');

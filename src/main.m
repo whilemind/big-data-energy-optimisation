@@ -12,8 +12,8 @@ function run_preprocess()
                 struct('name', "process_csv_pd", 'func', @process_csv_pd, 'run', 0, 'desc', "This is function is to generate csv process data to mat file"),...
                 struct('name', "process_m1_data", 'func', @process_m1_data, 'run', 0, 'desc', "This is function is to generate m1 energy data to mat file"),...  
                 struct('name', "process_qa_data", 'func', @process_qa_data, 'run', 0, 'desc', "This is function is to generate csv QA data to mat file"),...  
-                struct('name', "generate_factors", 'func', @generate_factors, 'run', 0, 'desc', "This is function is to generate factor fields data to mat file"),...
-                struct('name', "generate_gradecode", 'func', @generate_gradecode, 'run', 1, 'desc', "This is function is to find out unique grade code"),...  
+                struct('name', "generate_factors", 'func', @generate_factors, 'run', 1, 'desc', "This is function is to generate factor fields data to mat file"),...
+                struct('name', "generate_gradecode", 'func', @generate_gradecode, 'run', 0, 'desc', "This is function is to find out unique grade code"),...  
               ];
           
     % calling all those preprocessing methods which <run> are enabled.      
@@ -54,7 +54,7 @@ function run_postprocess()
     % easily turn it on or off according to our need.
     methods = [
                 struct('name', "collect_bad_reel", 'func', @collect_bad_reel, 'run', 0, 'desc', "This is function is to generate all the bad reel data to mat file"),...
-                struct('name', "collect_good_reel", 'func', @collect_good_reel, 'run', 0, 'desc', "This is function is to generate all the good reel data to mat file")...
+                struct('name', "collect_good_reel_by_grade_code", 'func', @collect_good_reel_by_grade_code, 'run', 1, 'desc', "This is function is to generate all the good reel data to mat file")...
               ];
           
     % calling all those postprocessing methods which <run> are enabled.      
@@ -71,6 +71,7 @@ end
 
 
 function main_p()
+    fprintf("\n\nStarting...\n");
     % running all the preprocessing of input files.     
     run_preprocess();
 
@@ -79,4 +80,6 @@ function main_p()
     
     % running all the active prostprocess
     run_postprocess();
+    
+    fprintf("\nFinished...\n");
 end

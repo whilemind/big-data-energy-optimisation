@@ -34,13 +34,66 @@
     "terms": [
         {
             "name": "Dryer_Draw",
-            "key_match": ["_Dryer_Draw"],
-            "ignore": ["none"]
+            "key_match": [
+              "_Dryer_Draw"
+            ],
+            "ignore": [
+              "none"
+            ]
         },
         {
             "name": "Dryer_Drive_Speed_ME",
-            "key_match": ["_Dryer_Drive_Speed_ME"],
-            "ignore": ["none"]
+            "key_match": [
+              "_Dryer_Drive_Speed_ME"
+            ],
+            "ignore": [
+              "none"
+            ]
+        },
+        {
+          "name": "Energy",
+          "key_match": [
+            "_Specific_Energy"
+          ],
+          "ignore": [
+            "none"
+          ]
+        },
+        {
+          "name": "Group_NNN",
+          "key_match": [
+            "_Group"
+          ],
+          "ignore": [
+            "none"
+          ]
+        },
+        {
+          "name": "M1_VIB",
+          "key_match": [
+            "_M1_VIB_Setpoints"
+          ],
+          "ignore": [
+            "none"
+          ]
+        },
+        {
+          "name": "M1_OD",
+          "key_match": [
+            "_M1_OD_Gram"
+          ],
+          "ignore": [
+            "none"
+          ]
+        },
+        {
+          "name": "PINE",
+          "key_match": [
+            "_Pine_"
+          ],
+          "ignore": [
+            "none"
+          ]
         }
     ]
   },
@@ -55,7 +108,25 @@
     "in_dir": "../data/in/",
     "out_dir": "../data/out/ana/",
     "bad_reel_file": "../data/out/badreel.mat",
-    "input_file_name": ["ANA_2017-18_Q_1-4_1.mat", "ANA_2017-18_Q_1-4_2.mat", "ANA_2017-18_Q_1-4_3.mat", "ANA_2017-18_Q_1-4_4.mat"],
+    "input_file_name": [
+      "ANA_2017-18_Q_1-4_1.mat", 
+      "ANA_2017-18_Q_1-4_2.mat", 
+      "ANA_2017-18_Q_1-4_3.mat", 
+      "ANA_2017-18_Q_1-4_4.mat"
+    ],
     "output_file_name": "ANA_2017-18_Q_1-4_bad_reel.mat"
+  },
+  "good_reel_by_gradecode": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/ana/",
+    "bad_reel_file": "../data/out/badreel.mat",
+    "input_file_name": [
+      "ANA_2017-18_Q_1-4_1.mat",
+      "ANA_2017-18_Q_1-4_2.mat",
+      "ANA_2017-18_Q_1-4_3.mat",
+      "ANA_2017-18_Q_1-4_4.mat"
+    ],
+    "output_file_name": "ANA_2017-18_Q_1-4_GRADE_",
+    "ext": ".mat"
   }
 }

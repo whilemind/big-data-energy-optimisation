@@ -101,16 +101,32 @@ function [qa_index_start, pd_index_start, output_file_suffix] = chunk_data_analy
                         );    
         
         tmp_ana = struct('reel_id', qa_data.mat_obj(i).reel_id);
+        [tmp_ana(:).gram] = str2num(qaData.grammage);
+        
         for j=1:length(filter_arr)
-            if(isfield(filter_arr, 'mean_sum'))
-                [tmp_ana(:).(filter_arr(j).keyword)] = filter_arr(j).mean_sum;    
+%             if(isfield(filter_arr, 'mean_sum'))
+%                 tmp_name = strcat(filter_arr(j).keyword, '_mean');
+%                 [tmp_ana(:).(tmp_name)] = filter_arr(j).mean_sum;    
+%             else
+%                 [tmp_ana(:).(tmp_name)] = NaN; 
+%             end
+            
+            if(isfield(filter_arr, 'max_sum'))
+                tmp_name = strcat(filter_arr(j).keyword, '_max');
+                [tmp_ana(:).(tmp_name)] = filter_arr(j).max_sum;
             else
-                [tmp_ana(:).(filter_arr(j).keyword)] = NaN;    
+                [tmp_ana(:).(tmp_name)] = NaN; 
+            end
+            
+            if(isfield(filter_arr, 'min_sum'))
+                tmp_name = strcat(filter_arr(j).keyword, '_min');
+                [tmp_ana(:).(tmp_name)] = filter_arr(j).min_sum;    
+            else
+                [tmp_ana(:).(tmp_name)] = NaN;    
             end
         end
 
-        
-        
+
         [tmp_ana(:).filter] = filter_arr;
         
         [tmp_ana(:).qa_data] = qaData;
@@ -192,6 +208,21 @@ function [indexAcc, objArr, data_mean, stdiv, filter_arr] = get_pd_analysis(inde
             [filter_data(:).max] = max(tmp, [], 1, 'omitnan');
             [filter_data(:).min] = min(tmp, [], 1, 'omitnan');
             [filter_data(:).mean_sum] = nansum(filter_data.mean);
+            [filter_data(:).max_sum] = nansum(filter_data.max);
+            [filter_data(:).min_sum] = nansum(filter_data.min);
+        else
+            tmp = [];
+            for j=1:flen
+                ind = factors.selected(i).fields(j).column_index;
+                tmp = [tmp, nan];
+            end
+            [filter_data(:).data] = tmp;
+            [filter_data(:).mean] = nanmean(tmp, 1);
+            [filter_data(:).max] = max(tmp, [], 1, 'omitnan');
+            [filter_data(:).min] = min(tmp, [], 1, 'omitnan');
+            [filter_data(:).mean_sum] = nansum(filter_data.mean);
+            [filter_data(:).max_sum] = nansum(filter_data.max);
+            [filter_data(:).min_sum] = nansum(filter_data.min);
         end
         filter_arr = [filter_arr; filter_data];
     end
