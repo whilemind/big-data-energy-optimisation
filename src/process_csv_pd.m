@@ -1,5 +1,5 @@
 function process_csv_pd()
-    config = jsondecode(fileread("../config/config.json"));
+    config = jsondecode(fileread('../config/config.json'));
     
     INPUT_DIR = "" + config.process_csv_pd.in_dir;
     OUTPUT_DIR = "" + config.process_csv_pd.out_dir;

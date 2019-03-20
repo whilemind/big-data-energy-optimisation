@@ -1,5 +1,5 @@
 function collect_bad_reel()
-    config = jsondecode(fileread("../config/config.json"));
+    config = jsondecode(fileread('../config/config.json'));
     
     INPUT_DIR = "" + config.analysis_data.out_dir;
     OUTPUT_DIR = "" + config.bad_reel.out_dir;

@@ -1,6 +1,6 @@
 
 function generate_factors()
-    config = jsondecode(fileread("../config/config.json"));
+    config = jsondecode(fileread('../config/config.json'));
 
     INPUT_DIR = "" + config.generate_factors.in_dir;
     OUTPUT_DIR = "" + config.generate_factors.out_dir;
@@ -24,14 +24,28 @@ function generate_factors()
 
     % reading a process data file to get the header names.
     csv_fd = fopen(IN_FILE);
-    header = fgetl(csv_fd);
-    fclose(csv_fd);
-
-    col_names = string(strsplit(header,','));
     col_details = [];
-    for i = 1:length(col_names)
-        col_details = [col_details; struct('name', col_names(i), 'index', i, 'is_used', 0)];
-    end %end of for loop
+    k = 0;
+    while ~feof(csv_fd)
+        header = fgetl(csv_fd);
+        col_names = string(strsplit(header,','));
+        
+%         for i = 1:length(col_names)
+            if length(col_names) > 2 && str2double(col_names(1, 2)) == 1
+                col_details = [col_details; struct('name', col_names(1,1), 'index', k, 'is_used', 0)];
+            end
+%         end
+        k = k + 1;
+    end
+    fclose(csv_fd);
+%     header = fgetl(csv_fd);
+%     fclose(csv_fd);
+% 
+%     col_names = string(strsplit(header,','));
+%     col_details = [];
+%     for i = 1:length(col_names)
+%         col_details = [col_details; struct('name', col_names(i), 'index', i, 'is_used', 0)];
+%     end %end of for loop
 
     selected = [];
     totalColumn = 0;
@@ -52,12 +66,11 @@ function generate_factors()
         selected = [selected, struct('keyword', termObj(t).name, 'fields', obj, 'fieldCount', k, 'ratio', (k*100)/length(col_names))];
     end
     
-    factors = struct(...
-                     "total_column", length(col_names),... 
-                     "used_column", totalColumn,...
-                     "column_used_ratio", (totalColumn*100)/length(col_names),...
-                     "selected", selected,...
-                     "columns", col_details...
+    factors = struct('total_column', length(col_names),... 
+                     'used_column', totalColumn,...
+                     'column_used_ratio', (totalColumn*100)/length(col_names),...
+                     'selected', selected,...
+                     'columns', col_details...
                     );
     save(OUT_FILE, 'factors');
     disp("Total Column will be used " + totalColumn);

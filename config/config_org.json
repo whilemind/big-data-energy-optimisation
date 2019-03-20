@@ -1,0 +1,105 @@
+{
+    "process_csv_pd": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/",
+    "input_files": ["PD_2017_Q1.csv", "PD_2017_Q2.csv", "PD_2017_Q3.csv", "PD_2017_Q4.csv", "PD_2018_Q1.csv", "PD_2018_Q2.csv", "PD_2018_Q3.csv", "PD_2018_Q4.csv"],
+    "output_file_name": "new_PD_2017-18_Q1-4.mat"
+  },
+  "process_m1_data": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/",
+    "input_files": ["PD_EX_M1.csv"],
+    "output_file_name": "new_PD_EX_M1.mat"
+  },
+  "process_qa_data": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/",
+    "input_file_name": "QA_DATA_2017-18.csv",
+    "output_file_name": "QA_DATA_2017-18.mat"
+  },
+  "generate_gradecode": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/",
+    "input_file_name": "QA_DATA_2017-18.mat",
+    "output_file_name": "GRADE_CODE_2017-18.mat"
+  },
+  "generate_factors": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/",
+    "input_file_name": "processdata_review2.csv",
+    "output_file_name": "PD_KEY_FACTOR_by_Tristen.mat",
+    "terms": [
+        {
+            "name": "dry",
+            "key_match": ["dry"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "pressure",
+            "key_match": ["pres"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "M1_Moisture_Profile",
+            "key_match": ["M1_Moisture_Profile"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "moisture",
+            "key_match": ["moisture"],
+            "ignore": ["M1_Moisture_Profile"]
+          
+        },
+        {
+            "name": "pump",
+            "key_match": ["pump"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "heating",
+            "key_match": ["heat"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "current",
+            "key_match": ["cur"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "steam",
+            "key_match": ["steam"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "water",
+            "key_match": ["water"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "M1_Grammage_Profile",
+            "key_match": ["M1_Grammage_Profile"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "M1_OD_Gram_Profile",
+            "key_match": ["M1_OD_Gram_Profile"],
+            "ignore": ["none"]
+        }
+
+    ]
+  },
+  "analysis_data": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/ana/",
+    "output_file_name": "ANA_2017-18_Q_1-4",
+    "extension": ".mat",
+    "batch_size": 3000
+  },
+  "bad_reel": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/ana/",
+    "bad_reel_file": "../data/out/badreel.mat",
+    "input_file_name": ["ANA_2017-18_Q_1-4_1.mat", "ANA_2017-18_Q_1-4_2.mat", "ANA_2017-18_Q_1-4_3.mat", "ANA_2017-18_Q_1-4_4.mat"],
+    "output_file_name": "ANA_2017-18_Q_1-4_bad_reel.mat"
+  }
+}

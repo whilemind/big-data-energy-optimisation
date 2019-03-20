@@ -1,21 +1,23 @@
 function process_qa_data()
-    config = jsondecode(fileread("../config/config.json"));
+
+    config = jsondecode(fileread('../config/config.json'));
 
     INPUT_DIR = "" + config.process_qa_data.in_dir;
     OUTPUT_DIR = "" + config.process_qa_data.out_dir;
     INPUT_FILE_NAME = "" + config.process_qa_data.input_file_name;
     OUTPUT_FILE_NAME = "" + config.process_qa_data.output_file_name;
     
-%   pre_process_qa_file()
+%   pre_process_qa_file(config.logger.verbose);
 
     IN_CSV_FILE  = INPUT_DIR + INPUT_FILE_NAME;
     OUT_MAT_FILE = OUTPUT_DIR + OUTPUT_FILE_NAME;
-    process_qa_csv_mat(IN_CSV_FILE, OUT_MAT_FILE);
+    process_qa_csv_mat(config.logger.verbose, IN_CSV_FILE, OUT_MAT_FILE);
     
 end
 
 % This function is to seperate the QA data to 2017-18
-function pre_process_qa_file()
+function pre_process_qa_file(verbose)
+    
     disp("Seperating the 2017-18 data");
     IN_FILE  = "../data/in/QA_DATA_2016-18_u.csv";
     OUT_FILE = "../data/out/QA_DATA_2017-18.csv";
@@ -29,6 +31,7 @@ function pre_process_qa_file()
     
     csv_fd = fopen(IN_FILE);
     j = 1;
+    fprintf("Preprocessing lines .......................");
     line = fgetl(csv_fd);
     while ischar(line)
         data = strsplit(line, ",");
@@ -44,7 +47,7 @@ function pre_process_qa_file()
             disp("Data anomaly found");
         end
         
-        disp("Processing line " + j);
+        display_progress(j, verbose);
         j = j + 1;
         drawnow;
         line = fgetl(csv_fd);
@@ -56,7 +59,8 @@ end
 %
 % This function is to convert csv QA file to MAT file.
 %
-function process_qa_csv_mat(inFile, outFile)
+function process_qa_csv_mat(verbose, inFile, outFile)
+
     disp(inFile + " QA CSV data to MAT " + outFile);
 
     csv_fd = fopen(inFile);
@@ -72,6 +76,7 @@ function process_qa_csv_mat(inFile, outFile)
     grammage = '';
     
     line = fgetl(csv_fd);
+    fprintf("Processing lines .......................");
     while ischar(line)
         data = strsplit(line, ",");
         if(length(data) == 8)
@@ -126,11 +131,14 @@ function process_qa_csv_mat(inFile, outFile)
             disp("Data anomaly found");
         end
         
-        disp("Processing line " + j);
-        j = j + 1;
+        %disp("Processing line " + j);
+        display_progress(j, verbose);
         drawnow;
+        j = j + 1;
         line = fgetl(csv_fd);
     end
+    disp("");
+    drawnow;
     
     % This is for the last entry, because loop will end before entry the
     % data in the array.

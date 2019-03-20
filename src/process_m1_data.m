@@ -1,5 +1,5 @@
 function process_m1_data()
-    config = jsondecode(fileread("../config/config.json"));
+    config = jsondecode(fileread('../config/config.json'));
     
     INPUT_DIR = "" + config.process_m1_data.in_dir;
     OUTPUT_DIR = "" + config.process_m1_data.out_dir;

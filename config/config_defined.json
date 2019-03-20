@@ -1,0 +1,87 @@
+{
+    "process_csv_pd": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/",
+    "input_files": ["PD_2017_Q1.csv", "PD_2017_Q2.csv", "PD_2017_Q3.csv", "PD_2017_Q4.csv", "PD_2018_Q1.csv", "PD_2018_Q2.csv", "PD_2018_Q3.csv", "PD_2018_Q4.csv"],
+    "output_file_name": "new_PD_2017-18_Q1-4.mat"
+  },
+  "process_m1_data": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/",
+    "input_files": ["PD_EX_M1.csv"],
+    "output_file_name": "new_PD_EX_M1.mat"
+  },
+  "process_qa_data": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/",
+    "input_file_name": "QA_DATA_2017-18.csv",
+    "output_file_name": "QA_DATA_2017-18.mat"
+  },
+  "generate_factors": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/",
+    "input_file_name": "PD_2017_Q1.csv",
+    "output_file_name": "PD_KEY_FACTOR_WITH_FILTER_DEFINED.mat",
+    "terms": [
+        {
+            "name": "Dry",
+            "key_match": ["301_1st_Dryer_Draw", "301_1st_Dryer_Drive_Speed_ME", "301_2nd_Dryer_Draw", "301_2nd_Dryer_Drive_Speed_ME", "301_3rd_Dryer_Draw", "301_3rd_Dryer_Drive_Speed_ME"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "Pressure",
+            "key_match": ["301_1st_Press_Draw", "301_1st_Press_Drive_Speed_ME", "301_1st_Press_Felt_Tension_Load_Cell_ME", "301_1st_Press_Uhle_Box_Sep_Lvl_me", "301_1st_Press_Uhle_Box_Sep_Lvl_pos", "301_1st_Press_Uhle_Box_Sep_Lvl_spa"],
+            "ignore": ["301_DWP_Torque_Pressure_me", "301_DWP_Torque_Pressure_pos", "301_DWP_Torque_Pressure_spa", "301_DWP_Torque_Regulation_Pres"]
+        },
+        {
+            "name": "Moisture",
+            "key_match": ["301_M1_Extensible_Moisture_me", "301_M1_Extensible_Moisture_spa"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "Pump",
+            "key_match": ["301_Backwater_Pump_North_ST", "301_Broke_Chest_Pump_ST"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "Torque",
+            "key_match": ["301_DWP_Torque_Pressure_me", "301_DWP_Torque_Pressure_pos", "301_DWP_Torque_Pressure_spa", "301_DWP_Torque_Regulation_Pres"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "Heating",
+            "key_match": ["301_Headbox_Heating_Tank_Temp_me", "301_Headbox_Heating_Tank_Temp_pos", "301_Headbox_Heating_Tank_Temp_spa"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "Current",
+            "key_match": ["301_M1_Ext_VIB_Air_Fan_Curr", "301_M1_Ext_VIB_Mist_Fan_Cur", "301_M1_No7_Ref_DiskAdj_Mtr_Cur"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "Steam",
+            "key_match": ["301_AVEBE_Steam_Flow_me", "301_Group101_Steam_MakeUp_Vlv_me", "301_Group301_Steam_MakeUp_Vlv_me"],
+            "ignore": ["none"]
+        },
+        {
+            "name": "Water",
+            "key_match": ["301_AVEBE_Dilu_Water_Flw_me", "301_AVEBE_Dilu_Water_Flw_pos"],
+            "ignore": ["none"]
+        }
+
+    ]
+  },
+  "analysis_data": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/ana/",
+    "output_file_name": "ANA_2017-18_Q_1-4",
+    "extension": ".mat"
+  },
+  "bad_reel": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/ana/",
+    "bad_reel_file": "../data/out/badreel.mat",
+    "input_file_name": ["ANA_2017-18_Q_1-4_1.mat", "ANA_2017-18_Q_1-4_2.mat", "ANA_2017-18_Q_1-4_3.mat", "ANA_2017-18_Q_1-4_4.mat"],
+    "output_file_name": "ANA_2017-18_Q_1-4_bad_reel_selected.mat"
+  }
+}
