@@ -33,7 +33,7 @@ function run_analysis()
     % all the analysis method defined here so that we can
     % easily turn it on or off according to our need.
     methods = [
-                struct('name', "data_analysis", 'func', @data_analysis, 'run', 0, 'desc', "This is function is to analysis data and save to mat file")...
+                struct('name', "data_analysis", 'func', @data_analysis, 'run', 1, 'desc', "This is function is to analysis data and save to mat file")...
               ];
           
     % calling all those analysis methods which <run> are enabled.      
@@ -54,7 +54,7 @@ function run_postprocess()
     % easily turn it on or off according to our need.
     methods = [
                 struct('name', "collect_bad_reel", 'func', @collect_bad_reel, 'run', 0, 'desc', "This is function is to generate all the bad reel data to mat file"),...
-                struct('name', "collect_good_reel_by_grade_code", 'func', @collect_good_reel_by_grade_code, 'run', 0, 'desc', "This is function is to generate all the good reel data to mat file")...
+                struct('name', "collect_good_reel_by_grade_code", 'func', @collect_good_reel_by_grade_code, 'run', 1, 'desc', "This is function is to generate all the good reel data to mat file")...
               ];
           
     % calling all those postprocessing methods which <run> are enabled.      

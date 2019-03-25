@@ -210,6 +210,8 @@ function [indexAcc, objArr, data_mean, stdiv, filter_arr] = get_pd_analysis(inde
             [filter_data(:).mean_sum] = nansum(filter_data.mean);
             [filter_data(:).max_sum] = nansum(filter_data.max);
             [filter_data(:).min_sum] = nansum(filter_data.min);
+            [filter_data(:).maxValue] = factors.selected(i).maxValue;
+            [filter_data(:).minValue] = factors.selected(i).minValue;
         else
             tmp = [];
             for j=1:flen
@@ -223,6 +225,8 @@ function [indexAcc, objArr, data_mean, stdiv, filter_arr] = get_pd_analysis(inde
             [filter_data(:).mean_sum] = nansum(filter_data.mean);
             [filter_data(:).max_sum] = nansum(filter_data.max);
             [filter_data(:).min_sum] = nansum(filter_data.min);
+            [filter_data(:).maxValue] = factors.selected(i).maxValue;
+            [filter_data(:).minValue] = factors.selected(i).minValue;
         end
         filter_arr = [filter_arr; filter_data];
     end

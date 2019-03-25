@@ -20,13 +20,27 @@ function collect_good_reel_by_grade_code()
     badReel = load(BAD_REEL_FILE);
     for i = 1:length(grades.gradecode)
         grade_analysis = [];
+        grade_analysis_ignore = [];
         fprintf("GradeCode %d of %d .......................", i, length(grades.gradecode));
         drawnow;
         for j= 1:length(analysis)
             display_progress(j, config.logger.verbose);
+            ignore = 0;
+            for k=1:length(analysis(j).filter)
+                if(analysis(j).filter(k).max_sum >= analysis(j).filter(k).maxValue || analysis(j).filter(k).min_sum <= analysis(j).filter(k).minValue)
+                    ignore = 1;
+                    break;
+                end
+            end
             if(strcmp(grades.gradecode(i), analysis(j).qa_data.grade_code))
                 if(~ismember(str2num(analysis(j).reel_id), badReel.M))
-                    grade_analysis = [grade_analysis; analysis(j)];
+                    analysis(j).reel_id = str2num(analysis(j).reel_id);
+                    analysis(j).gradecode = analysis(j).qa_data.grade_code;
+                    if(ignore == 0)
+                        grade_analysis = [grade_analysis; analysis(j)];
+                    else
+                        grade_analysis_ignore = [grade_analysis_ignore; analysis(j)];
+                    end
                 end
             end
         end
@@ -35,6 +49,13 @@ function collect_good_reel_by_grade_code()
         disp("Saving File " + saveFile);
         drawnow;
         save(saveFile, 'grade_analysis');
+
+        saveFile = OUT_FILE + grades.gradecode(i) + '_ignore' + EXT;
+        disp("Saving File " + saveFile);
+        drawnow;
+        save(saveFile, 'grade_analysis_ignore');
+
+        
     end
     
 end

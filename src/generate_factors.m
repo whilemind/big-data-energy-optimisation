@@ -53,7 +53,7 @@ function generate_factors()
             end % end of for
         end
         usedColumn = usedColumn + k;
-        selected = [selected, struct('keyword', termObj(t).name, 'fields', obj, 'fieldCount', k, 'ratio', (k*100)/total_column_count)];
+        selected = [selected, struct('keyword', termObj(t).name, 'fields', obj, 'fieldCount', k, 'ratio', (k*100)/total_column_count, 'maxValue', termObj(t).max_value, 'minValue', termObj(t).min_value)];
     end
     
     factors = struct('total_column', total_column_count,... 
