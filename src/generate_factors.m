@@ -29,26 +29,16 @@ function generate_factors()
     while ~feof(csv_fd)
         header = fgetl(csv_fd);
         col_names = string(strsplit(header,','));
-        
-%         for i = 1:length(col_names)
-            if length(col_names) > 2 && str2double(col_names(1, 2)) == 1
-                col_details = [col_details; struct('name', col_names(1,1), 'index', k, 'is_used', 0)];
-            end
-%         end
+        if length(col_names) > 2 && str2double(col_names(1, 2)) == 1
+            col_details = [col_details; struct('name', col_names(1,1), 'index', k, 'is_used', 0)];
+        end
         k = k + 1;
     end
     fclose(csv_fd);
-%     header = fgetl(csv_fd);
-%     fclose(csv_fd);
-% 
-%     col_names = string(strsplit(header,','));
-%     col_details = [];
-%     for i = 1:length(col_names)
-%         col_details = [col_details; struct('name', col_names(i), 'index', i, 'is_used', 0)];
-%     end %end of for loop
+    total_column_count = length(col_details) 
 
     selected = [];
-    totalColumn = 0;
+    usedColumn = 0;
     for t = 1:length(termObj)
         obj = [];
         k = 0;
@@ -62,18 +52,18 @@ function generate_factors()
                 end % end of if
             end % end of for
         end
-        totalColumn = totalColumn + k;
-        selected = [selected, struct('keyword', termObj(t).name, 'fields', obj, 'fieldCount', k, 'ratio', (k*100)/length(col_names))];
+        usedColumn = usedColumn + k;
+        selected = [selected, struct('keyword', termObj(t).name, 'fields', obj, 'fieldCount', k, 'ratio', (k*100)/total_column_count)];
     end
     
-    factors = struct('total_column', length(col_names),... 
-                     'used_column', totalColumn,...
-                     'column_used_ratio', (totalColumn*100)/length(col_names),...
+    factors = struct('total_column', total_column_count,... 
+                     'used_column', usedColumn,...
+                     'column_used_ratio', (usedColumn*100)/total_column_count,...
                      'selected', selected,...
                      'columns', col_details...
                     );
     save(OUT_FILE, 'factors');
-    disp("Total Column will be used " + totalColumn);
+    disp("Total Column will be used " + usedColumn);
     disp("Output file " + OUT_FILE + " saved successfully.");
     drawnow;
 end
