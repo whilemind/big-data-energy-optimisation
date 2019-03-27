@@ -24,8 +24,8 @@ function collect_good_reel_scale()
                 end
                 scale_data = struct('gradecode', grades.gradecode(i), 'gram', uni_grams(j));
                 for k = 1:length(config.generate_factors.terms)
-                    fieldNameMax = config.generate_factors.terms(k).name + '_max';
-                    fieldNameMin = config.generate_factors.terms(k).name + '_min';
+                    fieldNameMax = "" + config.generate_factors.terms(k).name + "_max";
+                    fieldNameMin = "" + config.generate_factors.terms(k).name + "_min";
                     dataMax = extractfield(analysis, fieldNameMax);
                     dataMin = extractfield(analysis, fieldNameMin);
                     maxAvg = nanmean(dataMax);
