@@ -120,5 +120,10 @@
     ],
     "output_file_name": "ANA_2017-18_Q_1-4_GRADE_",
     "ext": ".mat"
+  },
+  "make_scale": {
+    "in_dir": "../data/in/",
+    "out_dir": "../data/out/ana/",
+    "output_file_name": "ANA_2017-18_Q_1-4_SCALE.mat"
   }
 }
