@@ -4,6 +4,21 @@ clc;
 % Main function to call.
 main_p();
 
+function main_p()
+
+    fprintf("\n\nStarting...\n");
+    % running all the preprocessing of input files.     
+    run_preprocess();
+
+    % generating the analytical mat files.    
+    run_analysis();
+    
+    % running all the active prostprocess
+    run_postprocess();
+    
+    fprintf("\nFinished...\n");
+end
+
 
 function run_preprocess()
     % all the preprocessing method defined here so that we can
@@ -71,16 +86,4 @@ function run_postprocess()
 end
 
 
-function main_p()
-    fprintf("\n\nStarting...\n");
-    % running all the preprocessing of input files.     
-    run_preprocess();
 
-    % generating the analytical mat files.    
-    run_analysis();
-    
-    % running all the active prostprocess
-    run_postprocess();
-    
-    fprintf("\nFinished...\n");
-end

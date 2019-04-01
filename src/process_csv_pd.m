@@ -20,7 +20,7 @@ function process_csv_pd()
         while ischar(line)
             if(isHeader) 
                 data = strsplit(line, ",");
-                [pdata.datetime, pdata.sensorData] = filter_PD(data);
+                [pdata.datetime, pdata.sensorData] = filter_process_data(data);
                 processData = [processData; pdata];
             else 
                 isHeader = true;

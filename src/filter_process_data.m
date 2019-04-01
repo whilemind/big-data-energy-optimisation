@@ -1,4 +1,4 @@
-function [datetime, flt_data] = filter_PD(data)
+function [datetime, flt_data] = filter_process_data(data)
     flt_data = [];
     for i = 1:length(data)
 %         disp(data(i)); 

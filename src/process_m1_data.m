@@ -21,7 +21,7 @@ function process_m1_data()
         while ischar(line)
             if(isHeader) 
                 data = strsplit(line, ",");
-                [pdata.datetime, pdata.M1_energy] = filter_PD(data);
+                [pdata.datetime, pdata.M1_energy] = filter_process_data(data);
                 processData_m1 = [processData_m1; pdata];
             else 
                 isHeader = true;
