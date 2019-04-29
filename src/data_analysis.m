@@ -72,7 +72,7 @@ function [qa_index_start, pd_index_start, output_file_suffix] = chunk_data_analy
     for i = qa_index_start:length(qa_data.mat_obj)
         display_progress(i, verbose);
         
-        [pd_index_end, sen_data, sen_mean, sen_stdiv, filter_arr] = get_pd_analysis(pd_index_start, qa_data.mat_obj(i).date, pd_data.processData, fac_data.factors);
+        [pd_index_end, sen_data, sen_mean, sen_stdiv, filter_arr] = get_pd_analysis(pd_index_start, qa_data.mat_obj(i).reel_id, pd_data.processData, fac_data.factors);
         [eng_index_end, energy_data, eng_mean, eng_stdiv] = get_eng_analysis(eng_index_start, qa_data.mat_obj(i).date, eng_data.processData_m1);
         
         sen_stat = [sen_mean; sen_stdiv];
@@ -169,27 +169,45 @@ function [qa_index_start, pd_index_start, output_file_suffix] = chunk_data_analy
 end
 
 
-function [indexAcc, objArr, data_mean, stdiv, filter_arr] = get_pd_analysis(index, dateTime, obj, factors)
+function [indexAcc, objArr, data_mean, stdiv, filter_arr] = get_pd_analysis(index, reelID, obj, factors)
     % disp("get process data analysis...");
     drawnow;
     
     QA_DATE_FORMAT = 'dd/mm/yyyy HH:MM';
     PD_DATE_FORMAT = 'dd/mm/yyyy HH:MM';
-    date_limit = datenum(dateTime, QA_DATE_FORMAT);
-
+    %date_limit = datenum(dateTime, QA_DATE_FORMAT);
+    reel_id_num = str2num(reelID(4:end));
+    
     sen_data = [];
     objArr = [];
+    sen_reel_id = NaN;
     for i = index:length(obj)
-        pd_date = datenum(obj(i).datetime, PD_DATE_FORMAT);
-        if(pd_date < date_limit)
-            sen_data = [sen_data; obj(i).sensorData];
-            objArr = [objArr; obj(i)];
+        %pd_date = datenum(obj(i).datetime, PD_DATE_FORMAT);
+        %if(pd_date < date_limit)
+%         if(reel_id_num == 83508)
+%             drawnow;
+%         end
+        sen_reel_id = obj(i).sensorData(1041);
+        if(isnan(sen_reel_id))
+            sen_reel_id = obj(i).sensorData(1041);
         else
-            break;
+            if(sen_reel_id == reel_id_num)    
+                sen_data = [sen_data; obj(i).sensorData];
+                objArr = [objArr; obj(i)];
+            elseif(sen_reel_id > reel_id_num)
+                break;
+            end
         end
     end
     
     indexAcc = i;
+%     if(~isnan(sen_reel_id) && (sen_reel_id - reel_id_num) == 1)
+%         indexAcc = i;
+%     elseif(~isnan(sen_reel_id) && (sen_reel_id - reel_id_num) > 1)
+%         indexAcc = i;
+%     else
+%         disp("Not expected!!!");
+%     end
     
     filter_arr = [];
     m = length(factors.selected);

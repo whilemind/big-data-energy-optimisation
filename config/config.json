@@ -92,7 +92,7 @@
   "analysis_data": {
     "in_dir": "../data/in/",
     "out_dir": "../data/out/ana/",
-    "output_file_name": "ANA_2017-18_Q_1-4",
+    "output_file_name": "ANA_BY_REEL_2017-18_Q_1-4",
     "extension": ".mat",
     "batch_size": 3000
   },
@@ -118,12 +118,12 @@
       "ANA_2017-18_Q_1-4_3.mat",
       "ANA_2017-18_Q_1-4_4.mat"
     ],
-    "output_file_name": "ANA_2017-18_Q_1-4_GRADE_",
+    "output_file_name": "ANA_2017-18_Q_1-4_NEW_GRADE_",
     "ext": ".mat"
   },
   "make_scale": {
     "in_dir": "../data/in/",
     "out_dir": "../data/out/ana/",
-    "output_file_name": "ANA_2017-18_Q_1-4_SCALE.mat"
+    "output_file_name": "ANA_2017-18_Q_1-4_NEW_SCALE.mat"
   }
 }
